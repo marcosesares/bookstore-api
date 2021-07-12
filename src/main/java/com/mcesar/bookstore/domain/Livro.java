@@ -3,20 +3,27 @@ package com.mcesar.bookstore.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Livro implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String autor;
 	private String texto;
 
 	@ManyToOne
-	@JoinColumn(name = "categoria_id")
+	@JoinColumn
 	private Categoria categoria;
 
 	public Livro() {
@@ -74,7 +81,7 @@ public class Livro implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, autor, categoria, texto, titulo);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -86,8 +93,6 @@ public class Livro implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Livro other = (Livro) obj;
-		return Objects.equals(this.id, other.id) && Objects.equals(autor, other.autor)
-				&& Objects.equals(categoria, other.categoria) && Objects.equals(texto, other.texto)
-				&& Objects.equals(titulo, other.titulo);
+		return Objects.equals(id, other.id);
 	}
 }

@@ -3,6 +3,7 @@ package com.mcesar.bookstore.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,6 @@ public class Categoria implements Serializable {
 	private Long id;
 	private String nome;
 	private String descricao;
-	private String texto;
 	
 	@OneToMany(mappedBy = "categoria")
 	private List<Livro> livros = new ArrayList<Livro>();
@@ -29,12 +29,11 @@ public class Categoria implements Serializable {
 		super();
 	}
 
-	public Categoria(Long id, String nome, String descricao, String texto) {
+	public Categoria(Long id, String nome, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.texto = texto;
 	}
 
 	public Long getId() {
@@ -61,20 +60,29 @@ public class Categoria implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public String getTexto() {
-		return texto;
-	}
-
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
-
 	public List<Livro> getLivros() {
 		return livros;
 	}
 
 	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Categoria other = (Categoria) obj;
+		return Objects.equals(id, other.id);
 	} 
 
 }
