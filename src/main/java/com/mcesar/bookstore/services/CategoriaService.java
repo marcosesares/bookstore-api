@@ -39,7 +39,7 @@ public class CategoriaService {
 		try {
 			return repository.save(obj);
 		} catch (DataIntegrityViolationException e) {
-			throw new com.mcesar.bookstore.exceptions.DataIntegrityViolationException(e.getMessage());
+			throw new com.mcesar.bookstore.exceptions.DataIntegrityViolationException("data integrity");
 		}
 	}
 
