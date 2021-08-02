@@ -38,7 +38,7 @@ public class CategoriaService {
 		obj.setDescricao(objDTO.getDescricao());
 		try {
 			return repository.save(obj);
-		} catch (DataIntegrityViolationException e) {
+		} catch (IllegalArgumentException e) {
 			throw new com.mcesar.bookstore.exceptions.DataIntegrityViolationException("data integrity");
 		}
 	}
