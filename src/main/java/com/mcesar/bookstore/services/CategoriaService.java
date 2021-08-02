@@ -8,7 +8,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.mcesar.bookstore.domain.Categoria;
-import com.mcesar.bookstore.dtos.CategoriaDTO;
 import com.mcesar.bookstore.exceptions.ObjectNotFoundException;
 import com.mcesar.bookstore.repositories.CategoriaRepository;
 
@@ -32,7 +31,7 @@ public class CategoriaService {
 		return repository.save(obj);
 	}
 
-	public Categoria update(Long id, CategoriaDTO objDTO) {
+	public Categoria update(Long id, Categoria objDTO) {
 		Categoria obj = this.findById(id);
 		obj.setNome(objDTO.getNome());
 		obj.setDescricao(objDTO.getDescricao());
