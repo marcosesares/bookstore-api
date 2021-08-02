@@ -36,7 +36,11 @@ public class CategoriaService {
 		Categoria obj = this.findById(id);
 		obj.setNome(objDTO.getNome());
 		obj.setDescricao(objDTO.getDescricao());
-		return repository.save(obj);
+		try {
+			return repository.save(obj);
+		} catch (DataIntegrityViolationException e) {
+			throw new com.mcesar.bookstore.exceptions.DataIntegrityViolationException(e.getMessage());
+		}
 	}
 
 	public void delete(Long id) {
