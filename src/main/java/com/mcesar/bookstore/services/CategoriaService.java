@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import com.mcesar.bookstore.domain.Categoria;
 import com.mcesar.bookstore.dtos.CategoriaDTO;
@@ -37,11 +36,7 @@ public class CategoriaService {
 		Categoria obj = this.findById(id);
 		obj.setNome(objDTO.getNome());
 		obj.setDescricao(objDTO.getDescricao());
-		try {
-			return repository.save(obj);
-		} catch (TransactionSystemException e) {
-			throw new com.mcesar.bookstore.exceptions.DataIntegrityViolationException(e.getMessage());
-		}
+		return repository.save(obj);
 	}
 
 	public void delete(Long id) {
